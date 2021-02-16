@@ -1,0 +1,9 @@
+# Skip .idea
+.idea/
+
+# Skip composer files
+vendor/
+composer.lock
+
+# Skip temp files
+cache/

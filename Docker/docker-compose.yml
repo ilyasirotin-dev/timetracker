@@ -1,0 +1,30 @@
+version: '3'
+services:
+  web:
+    build: ./nginx
+    image: "nginx:timetracker"
+    ports:
+      - "8080:80"
+    volumes:
+      - ../:/var/www:z,rw
+    environment:
+      - NGINX_HOST=localhost
+      - NGINX_PORT=80
+    depends_on:
+      - mysql
+
+  php-fpm:
+    build: ./php
+    image: "php:timetracker"
+    volumes:
+      - ../:/var/www:z,rw
+
+  mysql:
+    image: "mysql:latest"
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=passwd
+      - MYSQL_DATABASE=timetracker
+    ports:
+        - "3306:3306"
