@@ -1,7 +1,7 @@
 create table time_table (
-    id int unsigned not null,
+    user_id int unsigned not null,
     start time,
     end time,
     created_at date,
-    foreign key (id) references users(id)
+    foreign key (user_id) references users(id)
 );

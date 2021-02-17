@@ -6,5 +6,6 @@ create table users (
     email varchar(40) not null,
     role enum("Admin", "User", "Guest") default("Guest"),
     password binary(32),
+    created_at date,
     active enum('Y', 'N') default('N')
 );

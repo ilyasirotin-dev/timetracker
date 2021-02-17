@@ -21,7 +21,8 @@ $loader->registerNamespaces(
         'App\Models' => APP_PATH . '/models',
         'App\Providers' => APP_PATH . '/providers',
         'App\Plugins' => APP_PATH . '/plugins',
-        'App\Forms' => APP_PATH . '/forms'
+        'App\Forms' => APP_PATH . '/forms',
+        'App\Helpers' => APP_PATH . '/helpers',
     ]
 );
 

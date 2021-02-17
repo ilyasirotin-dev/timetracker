@@ -45,22 +45,18 @@ class Users extends Model
         $this->hasMany(
             'id',
             TimeTable::class,
-            'id',
+            'user_id',
             [
-                'foreignKey' => [
-                    'message' => 'User cannot be deleted because it\'s used in TimeTable'
-                ],
+                'alias' => 'TimeTable',
             ]
         );
 
         $this->hasMany(
             'id',
             Lates::class,
-            'id',
+            'user_id',
             [
-                'foreignKey' => [
-                    'message' => 'User cannot be deleted because it\'s used in Lates'
-                ],
+                'alias' => 'Lates',
             ]
         );
     }

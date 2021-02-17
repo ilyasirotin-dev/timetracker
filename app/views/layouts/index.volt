@@ -1,3 +1,2 @@
-{{ flash.output() }}
 {{ content() }}
 

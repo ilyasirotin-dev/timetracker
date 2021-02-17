@@ -19,7 +19,7 @@ class Lates extends Model
     public function initialize()
     {
         $this->belongsTo(
-            'id',
+            'user_id',
             Users::class,
             'id'
         );

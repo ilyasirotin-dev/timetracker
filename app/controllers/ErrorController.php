@@ -9,8 +9,8 @@ class ErrorController extends ControllerBase
     protected function initialize()
     {
         $this->tag->setTitle('Error');
-
         parent::initialize();
+        $this->view->setTemplateAfter('error');
     }
 
     public function show404Action(): void

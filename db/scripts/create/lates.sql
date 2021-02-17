@@ -1,5 +1,5 @@
 create table lates (
-    id int unsigned not null,
+    user_id int unsigned not null,
     created_at date default(now()),
-    foreign key (id) references users(id)
+    foreign key (user_id) references users(id)
 );

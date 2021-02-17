@@ -5,10 +5,11 @@ namespace App\Controllers;
 
 class IndexController extends ControllerBase
 {
-    public function initialize()
+    protected function initialize()
     {
-        $this->tag->setTitle('Index');
+        $this->tag->setTitle('Home');
         parent::initialize();
+        $this->view->setTemplateAfter('index');
     }
 
     public function indexAction()
