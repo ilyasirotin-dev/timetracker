@@ -39,10 +39,10 @@ $router->add(
 );
 
 $router->add(
-    '/admin/add',
+    '/admin/create',
     [
-        'controller' => 'admin',
-        'action' => 'add',
+        'controller' => 'user',
+        'action' => 'create',
     ]
 );
 

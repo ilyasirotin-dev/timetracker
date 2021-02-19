@@ -5,7 +5,6 @@ namespace App\Controllers;
 
 use App\Forms\LoginForm;
 use App\Models\Users;
-use Phalcon\Exception;
 
 class LoginController extends ControllerBase
 {
@@ -17,61 +16,45 @@ class LoginController extends ControllerBase
 
     public function indexAction(): void
     {
-        $this->view->form = new LoginForm();
-    }
+        $form = new LoginForm();
 
-    public function loginAction(): void
-    {
         if($this->request->isPost()) {
             if ($this->security->checkToken()) {
 
                 $email = $this->request->getPost('email');
                 $password = $this->request->getPost('password');
 
-                try {
-                    $user = Users::findFirst(
-                        [
-                            "email = :email: AND password = :password: AND active = 1",
-                            'bind' => [
-                                'email' => $email,
-                                'password' => md5($password),
-                            ],
-                        ]
-                    );
-                } catch (Exception $e) {
-                    echo $e->getMessage();
-                }
+                 $user = Users::findFirst(
+                     [
+                         'columns' => 'id, username, role',
+                         "email = :email: AND password = :password: AND active = 1",
+                         'bind' => [
+                             'email' => $email,
+                             'password' => $this->security->hash($password),
+                         ],
+                     ]
+                 );
 
-                if ($user) {
+                if($user) {
                     $this->registerSession($user);
-                    $user->is_admin === 1 ?
-                        $userRole = 'admin' :
-                        $userRole = 'user';
+                    $this->response->redirect('index');
+                } else {
+                    $this->flash->error('Wrong email/password');
+
+                    return;
                 }
 
-                $this->flash->error('Wrong email/password');
-
-                $this->dispatcher->forward(
-                    [
-                        'controller' => 'login',
-                        'action' => 'login',
-                    ]
-                );
+                return;
             }
         }
+
+        $this->view->form = $form;
     }
 
-    private function logoutAction(): void
+    public function logoutAction(): void
     {
         $this->session->remove('auth');
-        $this->flash->success('Goodbye');
-
-        $this->dispatcher->forward(
-            [
-                'controller' => 'login',
-                'action' => 'index'
-            ]
-        );
+        $this->response->redirect('/login');
     }
 
     private function registerSession($user): void

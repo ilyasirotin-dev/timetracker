@@ -17,7 +17,6 @@ class LoginForm extends Form
      */
     public function initialize($entity = null, array $options = [])
     {
-
         /**
          * E-mail field
          */
@@ -45,5 +44,6 @@ class LoginForm extends Form
         );
 
         $this->add($password);
+
     }
 }

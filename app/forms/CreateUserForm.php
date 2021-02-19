@@ -1,8 +1,7 @@
 <?php
-
+declare(strict_types=1);
 
 namespace App\Forms;
-
 
 use Phalcon\Forms\Element\Password;
 use Phalcon\Forms\Element\Select;
@@ -10,10 +9,9 @@ use Phalcon\Forms\Element\Text;
 use Phalcon\Forms\Form;
 use Phalcon\Validation\Validator\Confirmation;
 use Phalcon\Validation\Validator\Email;
-use Phalcon\Validation\Validator\Identical;
 use Phalcon\Validation\Validator\PresenceOf;
 
-class AddUserForm extends Form
+class CreateUserForm extends Form
 {
     /**
      * @param null $entity
@@ -25,7 +23,7 @@ class AddUserForm extends Form
         /**
          * First name
          */
-        $fname = new Text('fname');
+        $fname = new Text('fname', ['class' => 'form-control']);
         $fname->setLabel('First name');
         $fname->setFilters(
             [
@@ -43,7 +41,7 @@ class AddUserForm extends Form
         /**
          * Last Name
          */
-        $lname = new Text('lname');
+        $lname = new Text('lname', ['class' => 'form-control']);
         $lname->setLabel('Last name');
         $lname->setFilters(
             [
@@ -61,7 +59,7 @@ class AddUserForm extends Form
         /**
          * Username
          */
-        $username = new Text('username');
+        $username = new Text('username', ['class' => 'form-control']);
         $username->setLabel('Username');
         $username->setFilters(
             [
@@ -78,7 +76,7 @@ class AddUserForm extends Form
         /**
          * E-mail field
          */
-        $email = new Text('email');
+        $email = new Text('email', ['class' => 'form-control']);
         $email->setLabel('E-mail');
         $email->setFilters('email');
         $email->addValidators(
@@ -93,24 +91,25 @@ class AddUserForm extends Form
         /**
          * Role
          */
-        $role = new Select('role', ['class' => 'form-select']);
-        $role->setLabel('Role');
-        $role->setOptions(
+        $role = new Select('role',
             [
                 0 => 'User',
                 1 => 'Admin',
-            ]
+            ],
+            ['class' => 'form-select']
         );
-
+        $role->setLabel('Role');
         $this->add($role);
 
         /**
          * Password field
          */
-        $password = new Password('password');
+        $password = new Password('password', ['class' => 'form-control']);
         $password->setLabel('Password');
-        $password->addValidator(
-            new PresenceOf(['message' => 'Password is required'])
+        $password->addValidators(
+            [
+                new PresenceOf(['message' => 'Password is required']),
+            ]
         );
 
         $this->add($password);
@@ -118,13 +117,13 @@ class AddUserForm extends Form
         /**
          * Confirm password
          */
-        $repeatPassword = new Password('repeatPassword');
+        $repeatPassword = new Password('repeatPassword', ['class' => 'form-control']);
         $repeatPassword->setLabel('Repeat password');
         $repeatPassword->addValidators(
             [
             new Confirmation(
                 [
-                    'message' => 'Password confirmation is required',
+                    'message' => 'Passwords doesn\'t match',
                     'with' => 'password'
                 ]
             ),

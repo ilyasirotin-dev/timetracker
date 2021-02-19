@@ -60,7 +60,7 @@ class TimeTable
                             'conditions' => 'user_id = :id: and created_at = :date:',
                             'bind' => [
                                 'id' => $user['id'],
-                                'date' => $date,
+                                'date' => strtotime($date),
                             ],
                         ]
                     );

@@ -3,16 +3,17 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
-class IndexController extends ControllerBase
+
+class TimetableController extends ControllerBase
 {
     protected function initialize()
     {
         parent::initialize();
     }
 
-    public function indexAction(): void
+    public function showAction(): void
     {
+
     }
 
 }
-

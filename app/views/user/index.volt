@@ -1,2 +1,1 @@
-{{ partial('statistic') }}
-{{ partial('table') }}
+{{ content() }}
