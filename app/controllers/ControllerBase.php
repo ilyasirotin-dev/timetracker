@@ -9,7 +9,7 @@ class ControllerBase extends Controller
 {
     protected function initialize()
     {
-        $this->tag->prependTitle('Time Log | ');
+        $this->tag->prependTitle('Hours Log | ');
         $this->view->setTemplateAfter('main');
     }
 }

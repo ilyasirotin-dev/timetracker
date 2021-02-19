@@ -7,7 +7,7 @@ use App\Models\TimeTable;
 use App\Models\Users;
 use Phalcon\Exception;
 
-class TimeTableGenerator
+class TimeTable
 {
     /**
      * @var array
@@ -16,7 +16,7 @@ class TimeTableGenerator
     /**
      * @var array
      */
-    public $tableTimeRecords;
+    public $timeRecords;
     /**
      * @var array
      */
@@ -28,17 +28,17 @@ class TimeTableGenerator
     /**
      * @var array
      */
-    public $year;
+    public $currentYear;
     /**
      * @var int
      */
-    public $month;
+    public $currentMonth;
 
     public function __construct($month = 0, $year = 0)
     {
-        $this->tableTimeRecords = [];
-        $this->month = $month;
-        $this->year = $year;
+        $this->timeRecords = [];
+        $this->currentMonth = $month;
+        $this->currentYear = $year;
         $this->setUsersList();
         $this->setYearsList();
         $this->setDatesList();
@@ -46,6 +46,7 @@ class TimeTableGenerator
 
     /**
      * @return array
+     * Generates a TimeTable
      */
     public function getTimeTable(): array
     {
@@ -68,7 +69,7 @@ class TimeTableGenerator
                 }
                 $usersTimeRecords[] = $record->toArray();
             }
-            $this->tableTimeRecords[$date] = $usersTimeRecords;
+            $this->timeRecords[$date] = $usersTimeRecords;
         }
 
         return $this->tableTimeRecords;
@@ -107,13 +108,13 @@ class TimeTableGenerator
             echo $e->getMessage();
         }
 
-        $this->yearsList = DateGenerator::getYearsList($this->year, $firstDate, $lastDate);
+        $this->yearsList = DateGenerator::getYearsList($this->currentYear, $firstDate, $lastDate);
 
     }
 
     private function setDatesList(): void
     {
-        $this->datesList = DateGenerator::getDatesList($this->month, $this->year);
+        $this->datesList = DateGenerator::getDatesList($this->currentMonth, $this->currentYear);
     }
 
 }

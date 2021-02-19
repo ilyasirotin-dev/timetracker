@@ -1,11 +1,11 @@
-create table users (
-    id int unsigned not null auto_increment primary key,
-    fname varchar(32),
-    lname varchar(32),
-    username varchar(32) not null,
-    email varchar(40) not null,
-    role enum("Admin", "User", "Guest") default("Guest"),
-    password binary(32),
-    created_at date,
-    active enum('Y', 'N') default('N')
+CREATE TABLE users (
+    id INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    fname VARCHAR(160),
+    lname VARCHAR(160),
+    username VARCHAR(80) not null,
+    email VARCHAR(120) not null,
+    is_admin TINYINT(1),
+    password VARCHAR(256),
+    created_at BIGINT,
+    active TINYINT(1)
 );

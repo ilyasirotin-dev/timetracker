@@ -1,5 +1,5 @@
-create table lates (
-    user_id int unsigned not null,
-    created_at date default(now()),
-    foreign key (user_id) references users(id)
+CREATE TABLE lates (
+    user_id INT(10) UNSIGNED NOT NULL,
+    created_at BIGINT,
+    FOREIGN KEY (user_id) REFERENCES users(id)
 );

@@ -1,3 +1,3 @@
-create table late_time (
-    late_time time not null default('9:00')
+CREATE TABLE late_time (
+    time BIGINT NOT NULL
 );

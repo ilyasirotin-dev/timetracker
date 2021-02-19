@@ -14,9 +14,9 @@ class DateGenerator
      * @return array
      * @throws \Exception
      *
-     * Generates a list of dates for given month and year in 'd-m-Y' format
+     * Generates a list of dates for given month and year in 'Y-m-d' format
      */
-    public static function getDatesList($month = 0, $year, $step = 'P1D'): array
+    public static function getDatesList($month, $year, $step = 'P1D'): array
     {
         $datesList = [];
         $dateString = $year.'-'.$month;
@@ -64,17 +64,25 @@ class DateGenerator
      */
     public static function getYearsList($selected, $firstDate, $lastDate): array
     {
-        $firstYear = date('Y', strtotime($firstDate));
-        $lastYear = date('Y', strtotime($lastDate));
-
-        for($i = $firstYear; $i <= $lastYear; $i++) {
-            $yearsList[] = [
-                'year' => $i,
-                'selected' => $i == $selected ? 'selected' : '',
+        if($firstDate === null || $lastDate === null) {
+            return [
+                'year' => date('Y'),
+                'selected' => 'selected',
             ];
         }
+        else {
+            $firstYear = date('Y', (int)$firstDate);
+            $lastYear = date('Y', (int)$lastDate);
 
-        return $yearsList;
+            for ($i = $firstYear; $i <= $lastYear; $i++) {
+                $yearsList[] = [
+                    'year' => $i,
+                    'selected' => $i == $selected ? 'selected' : '',
+                ];
+            }
+
+            return $yearsList;
+        }
     }
 
 }

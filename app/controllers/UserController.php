@@ -4,14 +4,15 @@ declare(strict_types=1);
 namespace App\Controllers;
 
 use App\Helpers\DateGenerator;
-use App\Helpers\TimeTableGenerator;
+use App\Helpers\TimeTable;
 
 class UserController extends ControllerBase
 {
     protected function initialize()
     {
-        $this->tag->setTitle('User');
         parent::initialize();
+        $this->tag->setTitle('User');
+        $this->view->setTemplateAfter('panel');
     }
 
     public function indexAction()
@@ -26,7 +27,8 @@ class UserController extends ControllerBase
         }
 
         $monthNamesList = DateGenerator::getMonthNamesList($selectedMonth);
-        $timeTable = new TimeTableGenerator($selectedMonth, $selectedYear);
+        $timeTable = new TimeTable($selectedMonth, $selectedYear);
+
 
         $this->view->usersList = $timeTable->usersList;
         $this->view->table = $timeTable->getTimeTable();

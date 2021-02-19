@@ -7,14 +7,12 @@ class IndexController extends ControllerBase
 {
     protected function initialize()
     {
-        $this->tag->setTitle('Home');
         parent::initialize();
-        $this->view->setTemplateAfter('index');
     }
 
-    public function indexAction()
+    public function indexAction(): void
     {
-
+        $this->response->redirect('/login');
     }
 
 }

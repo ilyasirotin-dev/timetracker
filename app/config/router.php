@@ -2,30 +2,56 @@
 
 $router = $di->getRouter();
 
+$router->setDefaultNamespace(
+    'App\Controllers'
+);
+
 $router->add(
     '/',
     [
-        'namespace' => 'App\Controllers',
-        'controller' => 'session',
+        'controller' => 'index',
         'action' => 'index',
     ]
 );
 
 $router->add(
-    '/send',
+    '/login',
     [
-        'namespace' => 'App\Controllers',
-        'controller' => 'session',
-        'action' => 'send',
+        'controller' => 'login',
+        'action' => 'index',
     ]
 );
 
 $router->add(
     '/user',
     [
-        'namespace' => 'App\Controllers',
         'controller' => 'user',
         'action' => 'index',
+    ]
+);
+
+$router->add(
+    '/admin',
+    [
+        'controller' => 'admin',
+        'action' => 'index',
+    ]
+);
+
+$router->add(
+    '/admin/add',
+    [
+        'controller' => 'admin',
+        'action' => 'add',
+    ]
+);
+
+$router->addPost(
+    'admin/suspend/:params',
+    [
+        'controller' => 'admin',
+        'action' => 'suspend',
+        'params' => 1
     ]
 );
 

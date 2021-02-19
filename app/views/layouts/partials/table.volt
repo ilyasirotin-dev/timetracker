@@ -38,5 +38,4 @@
             {% endfor %}
         </tr>
     {% endfor %}
-
 </table>

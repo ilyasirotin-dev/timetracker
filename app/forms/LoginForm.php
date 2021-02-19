@@ -9,7 +9,7 @@ use Phalcon\Forms\Form;
 use Phalcon\Validation\Validator\Email;
 use Phalcon\Validation\Validator\PresenceOf;
 
-class LogInForm extends Form
+class LoginForm extends Form
 {
     /**
      * @param null $entity

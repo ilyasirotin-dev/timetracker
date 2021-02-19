@@ -1,7 +1,7 @@
-create table time_table (
-    user_id int unsigned not null,
-    start time,
-    end time,
-    created_at date,
-    foreign key (user_id) references users(id)
+CREATE TABLE time_table (
+    user_id INT(10) UNSIGNED NOT NULL,
+    start BIGINT,
+    end BIGINT,
+    created_at BIGINT,
+    FOREIGN KEY (user_id) REFERENCES users(id)
 );
