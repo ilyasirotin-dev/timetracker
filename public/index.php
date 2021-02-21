@@ -48,6 +48,22 @@ try {
      */
     include APP_PATH . '/config/assets.php';
 
+//    include APP_PATH . '/library/dbSeed.php';
+//    seedUsers();
+//    seedTimeTable();
+
+//    $users = \App\Models\Users::find(
+//        [
+//            'columns' => 'id, fname, lname',
+//        ]
+//    );
+//
+//    foreach ($users as $user) {
+//        print_arr($user->timetable->toArray());
+//    }
+//
+//    die();
+
     /**
      * Handle the request
      */

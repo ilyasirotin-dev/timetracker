@@ -53,7 +53,7 @@ class Users extends Model
             TimeTable::class,
             'user_id',
             [
-                'alias' => 'TimeTable',
+                'alias' => 'timetable',
             ]
         );
 
@@ -62,7 +62,7 @@ class Users extends Model
             Lates::class,
             'user_id',
             [
-                'alias' => 'Lates',
+                'alias' => 'lates',
             ]
         );
     }

@@ -12,11 +12,12 @@ class LoginController extends ControllerBase
     {
         parent::initialize();
         $this->tag->setTitle('Login');
+        $this->view->setTemplateAfter('pass_content');
     }
 
     public function indexAction(): void
     {
-        $form = new LoginForm();
+            $form = new LoginForm();
 
         if($this->request->isPost()) {
             if ($this->security->checkToken()) {
@@ -26,7 +27,7 @@ class LoginController extends ControllerBase
 
                  $user = Users::findFirst(
                      [
-                         'columns' => 'id, username, role',
+                         'columns' => 'id, username, is_admin',
                          "email = :email: AND password = :password: AND active = 1",
                          'bind' => [
                              'email' => $email,
@@ -35,16 +36,12 @@ class LoginController extends ControllerBase
                      ]
                  );
 
-                if($user) {
+                if($user !== null) {
                     $this->registerSession($user);
-                    $this->response->redirect('index');
+                    $this->response->redirect('/');
                 } else {
-                    $this->flash->error('Wrong email/password');
-
-                    return;
+                    $this->flash->error('Wrong email or password');
                 }
-
-                return;
             }
         }
 
@@ -54,7 +51,7 @@ class LoginController extends ControllerBase
     public function logoutAction(): void
     {
         $this->session->remove('auth');
-        $this->response->redirect('/login');
+        $this->response->redirect('/');
     }
 
     private function registerSession($user): void
@@ -63,7 +60,7 @@ class LoginController extends ControllerBase
             [
                 'id' => $user->id,
                 'username' => $user->username,
-                'role' => $user->role,
+                'is_admin' => $user->is_admin,
             ]
         );
     }

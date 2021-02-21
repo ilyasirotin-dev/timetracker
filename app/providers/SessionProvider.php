@@ -11,7 +11,7 @@ class SessionProvider implements ServiceProviderInterface
 {
     public function register(DiInterface $di): void
     {
-        $di->setShared('login', function () {
+        $di->setShared('session', function () {
             $session = new SessionManager();
             $sessionSave = new SessionAdapter(
                 [

@@ -13,31 +13,9 @@ class UserController extends ControllerBase
         parent::initialize();
     }
 
-    public function indexAction(): void
-    {
-        if ($this->request->isPost()) {
-            $selectedMonth = $this->request->get('month');
-            $selectedYear = $this->request->get('year');
-
-        } else {
-            $selectedMonth = date('m');
-            $selectedYear = date('Y');
-        }
-
-        $monthNamesList = DateGenerator::getMonthNamesList($selectedMonth);
-        $timeTable = new TimeTable($selectedMonth, $selectedYear);
-
-
-        $this->view->usersList = $timeTable->usersList;
-        $this->view->table = $timeTable->getTimeTable();
-
-        $this->view->monthNamesList = $monthNamesList;
-        $this->view->yearsList = $timeTable->yearsList;
-
-    }
-
     public function createAction(): void
     {
+        $this->tag->setTitle("User creation");
         $form = new CreateUserForm();
         $this->view->form = $form;
 
@@ -54,11 +32,11 @@ class UserController extends ControllerBase
 
                 $user = new Users();
 
-                $user->fname = $this->request->get('fname');
-                $user->lname = $this->request->get('lname');
-                $user->username = $this->request->get('username');
-                $user->email = $this->request->get('email');
-                $user->is_admin = $this->request->get('role');
+                $user->fname = $this->request->get('fname', 'alpha');
+                $user->lname = $this->request->get('lname', 'alpha');
+                $user->username = $this->request->get('username', 'alnum');
+                $user->email = $this->request->get('email', 'email');
+                $user->is_admin = $this->request->get('is_admin', 'int');
                 $user->password = $this->request->get('password');
 
                 if ($user->save() === false) {
@@ -70,8 +48,7 @@ class UserController extends ControllerBase
 
                     return;
                 }
-
-                $this->response->redirect('admin');
+                $this->response->redirect('/admin/create');
             }
         }
     }

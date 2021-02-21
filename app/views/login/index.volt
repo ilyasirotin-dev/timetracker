@@ -13,6 +13,7 @@
         <div class="mb-3">
             {{ submit_button('Submit', 'class' : 'btn btn-primary') }}
         </div>
-        <input type='hidden' name="{{ security.getTokenKey() }}" value="{{ security.getToken() }}"/>
+        <input type='hidden' name='{{ security.getTokenKey() }}'
+               value='{{ security.getToken() }}'/>
     </form>
 </div>

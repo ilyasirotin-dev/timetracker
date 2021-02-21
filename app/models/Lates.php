@@ -21,7 +21,10 @@ class Lates extends Model
         $this->belongsTo(
             'user_id',
             Users::class,
-            'id'
+            'id',
+            [
+                'alias' => 'users'
+            ]
         );
     }
 }

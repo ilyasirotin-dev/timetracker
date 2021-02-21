@@ -27,7 +27,7 @@ class CreateUserForm extends Form
         $fname->setLabel('First name');
         $fname->setFilters(
             [
-                'string',
+                'alpha',
                 'trim',
             ]
         );
@@ -45,7 +45,7 @@ class CreateUserForm extends Form
         $lname->setLabel('Last name');
         $lname->setFilters(
             [
-                'string',
+                'alpha',
                 'trim',
             ]
         );
@@ -91,15 +91,15 @@ class CreateUserForm extends Form
         /**
          * Role
          */
-        $role = new Select('role',
+        $is_admin = new Select('is_admin',
             [
                 0 => 'User',
                 1 => 'Admin',
             ],
             ['class' => 'form-select']
         );
-        $role->setLabel('Role');
-        $this->add($role);
+        $is_admin->setLabel('Role');
+        $this->add($is_admin);
 
         /**
          * Password field

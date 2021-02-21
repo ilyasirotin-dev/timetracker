@@ -7,7 +7,7 @@ use App\Models\TimeTable;
 use App\Models\Users;
 use Phalcon\Exception;
 
-class TimeTable
+class Table
 {
     /**
      * @var array
@@ -16,7 +16,7 @@ class TimeTable
     /**
      * @var array
      */
-    public $timeRecords;
+    public $monthTimeRecords;
     /**
      * @var array
      */
@@ -42,37 +42,36 @@ class TimeTable
         $this->setUsersList();
         $this->setYearsList();
         $this->setDatesList();
+        $this->setTimeRecords();
     }
 
     /**
      * @return array
-     * Generates a TimeTable
+     * Generates a Table
      */
-    public function getTimeTable(): array
+    public function setTimeRecords(): void
     {
+        $monthTimeRecords = [];
+        $dateTimeRecords = [];
         foreach($this->datesList as $date) {
-            $usersTimeRecords = [];
-            foreach ($this->usersList as $user) {
                 try {
-                    $record = TimeTable::find(
+                    $dateTimeRecords = TimeTable::find(
                         [
-                            'columns' => 'start, [end], created_at',
-                            'conditions' => 'user_id = :id: and created_at = :date:',
+                            'columns' => 'user_id, start, [end], created_at',
+                            'conditions' =>  'created_at = :date:',
                             'bind' => [
-                                'id' => $user['id'],
                                 'date' => strtotime($date),
                             ],
+                            'order' => 'user_id',
                         ]
                     );
                 } catch (Exception $e) {
                     echo $e->getMessage();
                 }
-                $usersTimeRecords[] = $record->toArray();
-            }
-            $this->timeRecords[$date] = $usersTimeRecords;
+            $monthTimeRecords[$date] = $dateTimeRecords->toArray();
         }
 
-        return $this->tableTimeRecords;
+        $this->monthTimeRecords = $monthTimeRecords;
     }
 
     private function setUsersList(): void
@@ -104,6 +103,7 @@ class TimeTable
                     'column' => 'created_at',
                 ]
             );
+
         } catch (Exception $e) {
             echo $e->getMessage();
         }

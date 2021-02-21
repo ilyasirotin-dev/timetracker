@@ -8,8 +8,8 @@ class ErrorController extends ControllerBase
 {
     protected function initialize()
     {
-        $this->tag->setTitle('Error');
         parent::initialize();
+        $this->tag->setTitle('Error');
     }
 
     public function show404Action(): void

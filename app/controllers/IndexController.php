@@ -12,6 +12,7 @@ class IndexController extends ControllerBase
 
     public function indexAction(): void
     {
+        $this->response->redirect('/login');
     }
 
 }

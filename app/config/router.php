@@ -23,23 +23,23 @@ $router->add(
 );
 
 $router->add(
-    '/user',
+    '/log',
+    [
+        'controller' => 'timetable',
+        'action' => 'index',
+    ]
+);
+
+$router->add(
+    '/account',
     [
         'controller' => 'user',
-        'action' => 'index',
+        'action' => 'changePassword',
     ]
 );
 
 $router->add(
-    '/admin',
-    [
-        'controller' => 'admin',
-        'action' => 'index',
-    ]
-);
-
-$router->add(
-    '/admin/create',
+    '/create',
     [
         'controller' => 'user',
         'action' => 'create',
@@ -49,7 +49,7 @@ $router->add(
 $router->addPost(
     'admin/suspend/:params',
     [
-        'controller' => 'admin',
+        'controller' => 'user',
         'action' => 'suspend',
         'params' => 1
     ]

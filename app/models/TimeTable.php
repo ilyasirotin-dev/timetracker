@@ -30,6 +30,9 @@ class TimeTable extends Model
             'user_id',
             Users::class,
             'id',
+            [
+                'alias' => 'users',
+            ]
         );
     }
 }
