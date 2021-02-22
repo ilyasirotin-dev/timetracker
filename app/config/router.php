@@ -17,8 +17,16 @@ $router->add(
 $router->add(
     '/login',
     [
-        'controller' => 'login',
+        'controller' => 'session',
         'action' => 'index',
+    ]
+);
+
+$router->add(
+    '/logout',
+    [
+        'controller' => 'session',
+        'action' => 'logout'
     ]
 );
 
@@ -46,12 +54,36 @@ $router->add(
     ]
 );
 
-$router->addPost(
-    'admin/suspend/:params',
+$router->add(
+    '/password',
     [
         'controller' => 'user',
-        'action' => 'suspend',
+        'action' => 'password',
+    ]
+);
+
+$router->add(
+    '/list',
+    [
+      'controller' => 'user',
+      'action' => 'list',
+    ]
+);
+
+$router->addPost(
+    '/suspend/:params',
+    [
+        'controller' => 'user',
+        'action' => 'manage',
         'params' => 1
+    ]
+);
+
+$router->add(
+    '/latecomers',
+    [
+        'controller' => 'latecomers',
+        'action' => 'index',
     ]
 );
 

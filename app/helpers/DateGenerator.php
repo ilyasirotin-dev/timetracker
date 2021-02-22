@@ -27,7 +27,7 @@ class DateGenerator
         $period = new \DatePeriod($firstDateOfMonth, $step, $lastDayOfMonth - 1);
 
         foreach ($period as $date) {
-            $datesList[] = $date->format('Y-m-d');
+            $datesList[] = $date->format('d-M-y');
         }
 
         return $datesList;
@@ -45,12 +45,13 @@ class DateGenerator
     {
         $monthList = [];
         for($i = $firstMonth; $i <= $lastMonth; $i++) {
-            $month = date('F', mktime(0, 0, 0, $i, 10));
+            $month = date('F', mktime(0, 0, 0, $i, 1));
             $monthList[$i] = [
                 'name' => $month,
                 'selected' => $i == $selected ? 'selected' : '',
             ];
         }
+
         return $monthList;
     }
 

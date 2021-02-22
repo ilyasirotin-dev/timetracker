@@ -11,9 +11,10 @@ class TimetableController extends ControllerBase
     protected function initialize()
     {
         parent::initialize();
+        $this->tag->setTitle('Log');
     }
 
-    public function showAction(): void
+    public function indexAction(): void
     {
         if ($this->request->isPost()) {
             $selectedMonth = $this->request->get('month');
@@ -25,13 +26,12 @@ class TimetableController extends ControllerBase
         }
 
         $monthNamesList = DateGenerator::getMonthNamesList($selectedMonth);
-        $timeTable = new Table($selectedMonth, $selectedYear);
+        $timeTable = new Table($selectedMonth, $selectedYear, 1, 0);
 
-        print_die($timeTable);
-
-        $this->view->usersList = $timeTable->usersList;
-        $this->view->monthNamesList = $monthNamesList;
-        $this->view->yearsList = $timeTable->yearsList;
+        $this->view->usersList = $timeTable->users->toArray();
+        $this->view->monthList = $monthNamesList;
+        $this->view->yearsList = $timeTable->years;
+        $this->view->records = $timeTable->timeRecords;
     }
 
 }

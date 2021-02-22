@@ -3,9 +3,13 @@
             'title': 'Log',
             'uri': url('/log')
         ],
-        'account': [
-            'title': 'Manage account',
-            'uri': url('/account')
+        'password': [
+            'title': 'Change password',
+            'uri': url('/password')
+        ],
+        'users': [
+            'title': 'Users List',
+            'uri': url('/list')
         ],
         'create': [
             'title': 'Create user',
@@ -18,13 +22,17 @@
         'latecomers': [
             'title': 'Latecomers',
             'uri': url('/latecomers')
+        ],
+        'logout': [
+            'title': 'Log out',
+            'uri': url('/logout')
         ]
 ] %}
 
 <div class="container p-3">
     <div class="row">
         <div class="col-4">
-            <h1>Hours Log</h1>
+            <h1><a class="text-dark" href={{ url('/') }}>Hours Log</a></h1>
         </div>
         <div class="col-8">
             <ul class="nav justify-content-end">

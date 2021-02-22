@@ -10,21 +10,25 @@ use Phalcon\Exception;
 class Table
 {
     /**
-     * @var array
+     * @var int
      */
-    public $usersList;
+    public $userId;
+    /**
+     * @var bool
+     */
+    public $isAdmin;
+    /**
+     * @var Users
+     */
+    public $users;
     /**
      * @var array
      */
-    public $monthTimeRecords;
+    public $dates;
     /**
      * @var array
      */
-    public $datesList;
-    /**
-     * @var array
-     */
-    public $yearsList;
+    public $years;
     /**
      * @var array
      */
@@ -33,62 +37,71 @@ class Table
      * @var int
      */
     public $currentMonth;
+    /**
+     * @var array
+     */
+    public $timeRecords;
 
-    public function __construct($month = 0, $year = 0)
+    public function __construct($month = 0, $year = 0, $userId = 1, $isAdmin = false)
     {
-        $this->timeRecords = [];
         $this->currentMonth = $month;
         $this->currentYear = $year;
-        $this->setUsersList();
-        $this->setYearsList();
-        $this->setDatesList();
+        $this->userId = $userId;
+        $this->isAdmin = $isAdmin;
+        $this->setUsers();
+        $this->setYears();
+        $this->setDates();
         $this->setTimeRecords();
     }
 
     /**
-     * @return array
      * Generates a Table
      */
-    public function setTimeRecords(): void
+    private function setTimeRecords(): void
     {
-        $monthTimeRecords = [];
-        $dateTimeRecords = [];
-        foreach($this->datesList as $date) {
-                try {
-                    $dateTimeRecords = TimeTable::find(
-                        [
-                            'columns' => 'user_id, start, [end], created_at',
-                            'conditions' =>  'created_at = :date:',
-                            'bind' => [
-                                'date' => strtotime($date),
-                            ],
-                            'order' => 'user_id',
+        foreach($this->dates as $date) {
+            foreach($this->users as $user) {
+                $records = $user->getTimeTable(
+                    [
+                        'conditions' => 'created_at = :date:',
+                        'bind' => [
+                            'date' => strtotime($date),
                         ]
-                    );
-                } catch (Exception $e) {
-                    echo $e->getMessage();
-                }
-            $monthTimeRecords[$date] = $dateTimeRecords->toArray();
-        }
+                    ]
+                );
+                $dayRecords = [];
+                foreach($records as $record) {
+                    $start = date('H:m', (int)$record->start);
+                    ($record->end === null) ?
+                        $end = '' :
+                        $end = date('H:m', (int)$record->end);
 
-        $this->monthTimeRecords = $monthTimeRecords;
+                    $dayRecords[] = $start." - ".$end;
+                }
+                $usersDayRecords[$user->fname] = $dayRecords;
+            }
+            $this->timeRecords[$date] = $usersDayRecords;
+        }
     }
 
-    private function setUsersList(): void
+    private function setUsers(): void
     {
         try {
-            $this->usersList = Users::find(
+            $this->users = Users::find(
                 [
-                    'columns' => 'id, fname, lname',
+                    'conditions' => 'active = 1',
+                    'order' => 'field(id, :userId:) DESC',
+                    'bind' => [
+                        'userId' => $this->userId,
+                    ]
                 ]
             );
         } catch (Exception $e) {
             echo $e->getMessage();
         }
-        $this->usersList = $this->usersList->toArray();
     }
 
-    private function setYearsList(): void
+    private function setYears(): void
     {
         $firstDate = 0;
         $lastDate = 0;
@@ -108,13 +121,13 @@ class Table
             echo $e->getMessage();
         }
 
-        $this->yearsList = DateGenerator::getYearsList($this->currentYear, $firstDate, $lastDate);
+        $this->years = DateGenerator::getYearsList($this->currentYear, $firstDate, $lastDate);
 
     }
 
-    private function setDatesList(): void
+    private function setDates(): void
     {
-        $this->datesList = DateGenerator::getDatesList($this->currentMonth, $this->currentYear);
+        $this->dates = DateGenerator::getDatesList($this->currentMonth, $this->currentYear);
     }
 
 }

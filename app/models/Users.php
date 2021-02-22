@@ -56,15 +56,6 @@ class Users extends Model
                 'alias' => 'timetable',
             ]
         );
-
-        $this->hasMany(
-            'id',
-            Lates::class,
-            'user_id',
-            [
-                'alias' => 'lates',
-            ]
-        );
     }
 
     public function validation(): bool

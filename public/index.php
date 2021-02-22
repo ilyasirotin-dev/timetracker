@@ -52,18 +52,6 @@ try {
 //    seedUsers();
 //    seedTimeTable();
 
-//    $users = \App\Models\Users::find(
-//        [
-//            'columns' => 'id, fname, lname',
-//        ]
-//    );
-//
-//    foreach ($users as $user) {
-//        print_arr($user->timetable->toArray());
-//    }
-//
-//    die();
-
     /**
      * Handle the request
      */

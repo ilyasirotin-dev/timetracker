@@ -5,11 +5,14 @@ namespace App\Models;
 
 use Phalcon\Mvc\Model;
 
-class lateTime extends Model
+class LateTime extends Model
 {
     /**
-     * @var string
+     * @var int
      */
-    public $late_time;
-
+    public $hours;
+    /**
+     * @var int
+     */
+    public $minutes;
 }

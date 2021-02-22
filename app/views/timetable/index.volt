@@ -1,9 +1,12 @@
-<div class="container p-2">
-    <form method="post" action="{{ url('/user') }}" name="selectMonth">
+<div class="container p-3">
+    {{ partial('statistic') }}
+</div>
+<div class="container p-3">
+    <form method="post" action="{{ url('/log') }}" name="selectMonth">
         <label>
             Select month:
             <select name="month" onchange="this.form.submit()">
-                {% for monthNumber, month in view.monthNamesList %}
+                {% for monthNumber, month in view.monthList %}
                     <option value='{{ monthNumber }}' {{ month['selected'] }}>{{ month['name'] }}</option>
                 {% endfor %}
             </select>
@@ -19,20 +22,20 @@
 <table class="table table-bordered text-center">
     <thead>
         <tr>
-            <td></td>
+            <td class="col-md-1"></td>
             {% for user in view.usersList %}
                 <td>{{ user['fname'] }} {{ user['lname'] }}</td>
             {% endfor %}
         </tr>
     </thead>
 
-    {% for date, users in view.table %}
+    {% for date, users in view.records %}
         <tr>
             <td>{{ date }}</td>
-            {% for values in users %}
+            {% for records in users %}
                 <td>
-                    {% for record in values %}
-                        <p>{{ record['start'] }}-{{ record['end'] }}</p>
+                    {% for value in records %}
+                        <p>{{ value }}</p>
                     {% endfor %}
                 </td>
             {% endfor %}

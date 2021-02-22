@@ -1,8 +1,8 @@
 <?php
 declare(strict_types=1);
 
-define('USERS_COUNT', 20);
-define('TIMESTAMPS_COUNT', 300);
+define('USERS_COUNT', 10);
+define('TIMESTAMPS_COUNT', 200);
 
 function seedUsers()
 {
@@ -32,12 +32,12 @@ function seedTimeTable()
     for($i = 0; $i < TIMESTAMPS_COUNT; $i++) {
         $timeTable = new \App\Models\TimeTable();
         $start_time = [
-            random_int(7, 20),
+            random_int(7, 9),
             random_int(0, 59),
             0,
-            random_int(2, 4),
+            random_int(1, 2),
             random_int(1, 31),
-            random_int(2020, 2021),
+            random_int(2020, 2020),
         ];
 
         $end_time = [

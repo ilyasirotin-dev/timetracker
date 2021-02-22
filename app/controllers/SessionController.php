@@ -6,7 +6,7 @@ namespace App\Controllers;
 use App\Forms\LoginForm;
 use App\Models\Users;
 
-class LoginController extends ControllerBase
+class SessionController extends ControllerBase
 {
     public function initialize()
     {
@@ -27,20 +27,24 @@ class LoginController extends ControllerBase
 
                  $user = Users::findFirst(
                      [
-                         'columns' => 'id, username, is_admin',
-                         "email = :email: AND password = :password: AND active = 1",
+                         'columns' => 'id, username, is_admin, password',
+                         "email = :email: AND active = 1",
                          'bind' => [
                              'email' => $email,
-                             'password' => $this->security->hash($password),
                          ],
                      ]
                  );
 
                 if($user !== null) {
-                    $this->registerSession($user);
-                    $this->response->redirect('/');
+                    $checkPassword = $this->security->checkHash($password, $user->password);
+                    if($checkPassword === true) {
+                        $this->registerSession($user);
+                        $this->response->redirect('/log');
+                    } else {
+                        $this->flash->error('Wrong password');
+                    }
                 } else {
-                    $this->flash->error('Wrong email or password');
+                    $this->flash->error('Wrong email');
                 }
             }
         }
