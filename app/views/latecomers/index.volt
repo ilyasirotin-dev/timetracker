@@ -1,5 +1,5 @@
 <h4>Set late time</h4>
-<form class="form-inline" action="{{ url('/latecomers') }}" method="post">
+<form class="form-inline" action="{{ url('/latecomers/settime') }}" method="post">
     <div class="mb-3">
         <div class="row mb-2">
             <div class="col-1">
@@ -18,3 +18,5 @@
         </div>
     </div>
 </form>
+{{ partial('date_selector', ['action' : url('/latecomers')])}}
+{{ partial('table') }}

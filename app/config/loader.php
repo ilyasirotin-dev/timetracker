@@ -23,6 +23,7 @@ $loader->registerNamespaces(
         'App\Plugins' => APP_PATH . '/plugins',
         'App\Forms' => APP_PATH . '/forms',
         'App\Helpers' => APP_PATH . '/helpers',
+        'App\Helpers\Tables' => APP_PATH . '/helpers/tables',
     ]
 );
 

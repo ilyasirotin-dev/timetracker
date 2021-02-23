@@ -19,6 +19,10 @@
             'title': 'Holidays',
             'uri': url('/holidays')
         ],
+        'holidays_create': [
+            'title': 'Create holiday',
+            'uri': url('/holidays/create')
+        ],
         'latecomers': [
             'title': 'Latecomers',
             'uri': url('/latecomers')

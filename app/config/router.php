@@ -33,8 +33,16 @@ $router->add(
 $router->add(
     '/log',
     [
-        'controller' => 'timetable',
+        'controller' => 'statistic',
         'action' => 'index',
+    ]
+);
+
+$router->add(
+    '/log/start',
+    [
+        'controller' => 'statistic',
+        'action' => 'start',
     ]
 );
 
@@ -84,6 +92,22 @@ $router->add(
     [
         'controller' => 'latecomers',
         'action' => 'index',
+    ]
+);
+
+$router->add(
+    '/latecomers/settime',
+    [
+        'controller' => 'latecomers',
+        'action' => 'setTime',
+    ]
+);
+
+$router->add(
+    '/holidays/create',
+    [
+        'controller' => 'holidays',
+        'action' => 'create',
     ]
 );
 

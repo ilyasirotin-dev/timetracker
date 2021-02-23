@@ -1,3 +1,3 @@
 <form action="{{ action }}" method="get">
-    <button class="{{ type }}">{{ name }}</button>
+    <button class="{{ type }}" id="actionBtn">{{ name }}</button>
 </form>

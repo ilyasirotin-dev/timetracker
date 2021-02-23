@@ -10,3 +10,4 @@ $headerCollection->addCss('css/errors.css');
 
 $footerCollection->addJs('js/bootstrap.min.js');
 $footerCollection->addJs('js/jquery-3.5.1.min.js');
+$footerCollection->addJs('js/toggle_rows.js');

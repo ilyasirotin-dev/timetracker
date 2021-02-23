@@ -5,20 +5,12 @@ namespace App\Models;
 
 use Phalcon\Mvc\Model;
 
-class TimeTable extends Model
+class Latecomers extends Model
 {
     /**
      * @var int
      */
     public $user_id;
-    /**
-     * @var int
-     */
-    public $start;
-    /**
-     * @var int
-     */
-    public $end;
     /**
      * @var int
      */
