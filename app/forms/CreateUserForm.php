@@ -25,12 +25,10 @@ class CreateUserForm extends Form
          */
         $fname = new Text('fname', ['class' => 'form-control']);
         $fname->setLabel('First name');
-        $fname->setFilters(
-            [
-                'alpha',
-                'trim',
-            ]
-        );
+        $fname->setFilters([
+            'alpha',
+            'trim',
+        ]);
         $fname->addValidator(
             new PresenceOf(['message' => 'First name is required'])
         );
@@ -43,12 +41,10 @@ class CreateUserForm extends Form
          */
         $lname = new Text('lname', ['class' => 'form-control']);
         $lname->setLabel('Last name');
-        $lname->setFilters(
-            [
-                'alpha',
-                'trim',
-            ]
-        );
+        $lname->setFilters([
+            'alpha',
+            'trim',
+        ]);
         $fname->addValidator(
             new PresenceOf(['message' => 'Last name is required'])
         );
@@ -61,12 +57,10 @@ class CreateUserForm extends Form
          */
         $username = new Text('username', ['class' => 'form-control']);
         $username->setLabel('Username');
-        $username->setFilters(
-            [
-                'string',
-                'trim',
-            ]
-        );
+        $username->setFilters([
+            'string',
+            'trim',
+        ]);
         $username->addValidator(
             new PresenceOf(['message' => 'Username is required'])
         );
@@ -79,12 +73,10 @@ class CreateUserForm extends Form
         $email = new Text('email', ['class' => 'form-control']);
         $email->setLabel('E-mail');
         $email->setFilters('email');
-        $email->addValidators(
-            [
-                new PresenceOf(['message' => 'E-mail is required']),
-                new Email(['message' => 'E-mail is not valid']),
-            ]
-        );
+        $email->addValidators([
+            new PresenceOf(['message' => 'E-mail is required']),
+            new Email(['message' => 'E-mail is not valid']),
+        ]);
 
         $this->add($email);
 
@@ -106,11 +98,9 @@ class CreateUserForm extends Form
          */
         $password = new Password('password', ['class' => 'form-control']);
         $password->setLabel('Password');
-        $password->addValidators(
-            [
-                new PresenceOf(['message' => 'Password is required']),
-            ]
-        );
+        $password->addValidators([
+            new PresenceOf(['message' => 'Password is required']),
+        ]);
 
         $this->add($password);
 
@@ -119,16 +109,14 @@ class CreateUserForm extends Form
          */
         $repeatPassword = new Password('repeatPassword', ['class' => 'form-control']);
         $repeatPassword->setLabel('Repeat password');
-        $repeatPassword->addValidators(
-            [
+        $repeatPassword->addValidators([
             new Confirmation(
                 [
                     'message' => 'Passwords doesn\'t match',
                     'with' => 'password'
                 ]
             ),
-            ]
-        );
+        ]);
 
         $this->add($repeatPassword);
     }

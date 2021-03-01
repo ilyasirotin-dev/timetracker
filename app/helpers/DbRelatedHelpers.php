@@ -14,16 +14,12 @@ class DbRelatedHelpers
         $minYear = 0;
         $maxYear = 0;
         try {
-            $minYear = TimeTable::minimum(
-                [
-                    'column' => 'created_at',
-                ]
-            );
-            $maxYear = TimeTable::maximum(
-                [
-                    'column' => 'created_at',
-                ]
-            );
+            $minYear = TimeTable::minimum([
+                'column' => 'created_at',
+            ]);
+            $maxYear = TimeTable::maximum([
+                'column' => 'created_at',
+            ]);
 
         } catch (Exception $e) {
             echo $e->getMessage();

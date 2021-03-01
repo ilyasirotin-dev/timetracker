@@ -1,5 +1,6 @@
 CREATE TABLE latecomers (
-    user_id INT UNSIGNED NOT NULL PRIMARY KEY,
+    id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    user_id INT(10) UNSIGNED NOT NULL,
     created_at BIGINT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id)
 );

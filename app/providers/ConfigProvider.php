@@ -11,7 +11,7 @@ class ConfigProvider implements ServiceProviderInterface
     public function register(DiInterface $di): void
     {
         $configPath = APP_PATH . '/config/config.php';
-        if(!file_exists($configPath) || !is_readable($configPath)) {
+        if (!file_exists($configPath) || !is_readable($configPath)) {
             throw new Exception("Config does not exist or not readable: " . $configPath);
         }
 

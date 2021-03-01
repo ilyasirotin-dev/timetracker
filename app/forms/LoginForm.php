@@ -24,12 +24,10 @@ class LoginForm extends Form
         $email = new Text('email');
         $email->setLabel('E-mail');
         $email->setFilters('email');
-        $email->addValidators(
-            [
-                new PresenceOf(['message' => 'E-mail is required']),
-                new Email(['message' => 'E-mail is not valid']),
-            ]
-        );
+        $email->addValidators([
+            new PresenceOf(['message' => 'E-mail is required']),
+            new Email(['message' => 'E-mail is not valid']),
+        ]);
 
         $this->add($email);
 
@@ -38,11 +36,9 @@ class LoginForm extends Form
          */
         $password = new Password('password');
         $password->setLabel('Password');
-        $password->addValidators(
-            [
-                new PresenceOf(['message' => 'Password is required'])
-            ]
-        );
+        $password->addValidators([
+            new PresenceOf(['message' => 'Password is required'])
+        ]);
 
         $this->add($password);
 

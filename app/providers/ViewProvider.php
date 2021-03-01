@@ -14,15 +14,13 @@ class ViewProvider implements ServiceProviderInterface
         $viewsDir = $config->application->viewsDir;
         $partialsDir = $config->application->partialsDir;
 
-        $di->setShared('view', function () use($viewsDir, $partialsDir) {
+        $di->setShared('view', function () use ($viewsDir, $partialsDir) {
             $view = new View();
             $view->setViewsDir($viewsDir);
             $view->setPartialsDir($partialsDir);
-            $view->registerEngines(
-                [
-                    '.volt' => 'volt'
-                ]
-            );
+            $view->registerEngines([
+                '.volt' => 'volt'
+            ]);
 
             return $view;
         });

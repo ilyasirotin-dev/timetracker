@@ -10,6 +10,7 @@ class ErrorController extends ControllerBase
     {
         parent::initialize();
         $this->tag->setTitle('Error');
+        $this->view->setTemplateAfter('pass_content');
     }
 
     public function show404Action(): void

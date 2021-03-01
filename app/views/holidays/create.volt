@@ -16,8 +16,8 @@
                         {{ form.render('date') }}
                     </div>
                     <div class="col-3">
-                        {{ form.label('repeat') }}
-                        {{ form.render('repeat') }}
+                        {{ form.label('repeatable') }}
+                        {{ form.render('repeatable') }}
                     </div>
                 </div>
                 <div class="row">

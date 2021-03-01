@@ -1,6 +1,5 @@
-<div class="container">
-    <p>You have:</p>
-    <p>You have/Assigned:</p>
-    <p>Assigned:</p>
-    <p>Lates count:</p>
+<div class="container p-3">
+    <p>Your total hours: {{ total }}</p>
+    <p>Required hours in this month: {{ required }}</p>
+    <p>Lates count: {{ lates }}</p>
 </div>

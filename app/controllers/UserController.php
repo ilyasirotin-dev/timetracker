@@ -18,11 +18,9 @@ class UserController extends ControllerBase
     public function listAction(): void
     {
         $this->tag->setTitle('Users list');
-        $users = Users::find(
-            [
-                'columns' => 'id, fname, lname, username, email, is_admin, active',
-            ]
-        );
+        $users = Users::find([
+            'columns' => 'id, fname, lname, username, email, is_admin, active',
+        ]);
         $this->view->usersList = $users;
     }
 
@@ -32,9 +30,9 @@ class UserController extends ControllerBase
         $form = new CreateUserForm();
         $this->view->form = $form;
 
-        if($this->request->isPost()) {
+        if ($this->request->isPost()) {
 
-            if($form->isValid($_POST) === false) {
+            if ($form->isValid($_POST) === false) {
                 $formMessages = $form->getMessages();
 
                 foreach ($formMessages as $message) {
@@ -52,20 +50,15 @@ class UserController extends ControllerBase
                 $user->is_admin = $this->request->get('is_admin', 'int');
                 $user->password = $this->request->get('password');
 
-                if ($user->validation() !== false) {
+                if ($user->save() === false) {
                     $messages = $user->getMessages();
 
                     foreach ($messages as $message) {
                         $this->flash->error($message->getMessage());
                     }
+                    return;
                 } else {
-                    $user->save();
-                    $this->dispatcher->forward(
-                        [
-                            'controller' => 'user',
-                            'action' => 'create',
-                        ]
-                    );
+                    $this->response->redirect('/list');
                 }
             }
         }
@@ -73,14 +66,12 @@ class UserController extends ControllerBase
 
     public function suspendAction($userId): void
     {
-        $user = Users::findFirst(
-            [
-                'conditions' => 'id = :id:',
-                'bind' => ['id' => $userId],
-            ]
-        );
+        $user = Users::findFirst([
+            'conditions' => 'id = :id:',
+            'bind' => ['id' => $userId],
+        ]);
 
-        if($user) {
+        if ($user) {
             $user->active = false;
             $user->update();
         }
@@ -93,10 +84,10 @@ class UserController extends ControllerBase
         $form = new ChangePasswordForm();
         $this->view->form = $form;
 
-        if($this->request->isPost()) {
+        if ($this->request->isPost()) {
             $newPassword = $this->request->get('newPassword');
 
-            if($form->isValid($_POST) === false) {
+            if ($form->isValid($_POST) === false) {
                 $formMessages = $form->getMessages();
 
                 foreach ($formMessages as $message) {
@@ -105,27 +96,18 @@ class UserController extends ControllerBase
             } else {
                 $userId = $this->session->get('auth')['id'];
 
-                $user = Users::findFirst(
-                    [
-                        "id = :id:",
-                        'bind' => [
-                            'id' => $userId,
-                        ],
-                    ]
-                );
+                $user = Users::findFirst([
+                    "id = :id:",
+                    'bind' => [
+                        'id' => $userId,
+                    ],
+                ]);
 
                 $user->password = $this->security->hash($newPassword);
-                try {
-                    $user->update();
-                } catch(Exception $e) {
-                    echo $e->getMessage();
+
+                if ($user->update()) {
+                    $this->flash->success('Password successfully updated');
                 }
-                $this->dispatcher->forward(
-                    [
-                        'controller' => 'user',
-                        'action' => 'password',
-                    ]
-                );
             }
         }
     }

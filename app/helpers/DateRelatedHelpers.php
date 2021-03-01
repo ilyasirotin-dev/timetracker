@@ -15,7 +15,7 @@ class DateRelatedHelpers
     public static function getMonthList($firstMonth = 1, $lastMonth = 12, $format = 'F'): array
     {
         $monthList = [];
-        for($i = $firstMonth; $i <= $lastMonth; $i++) {
+        for ($i = $firstMonth; $i <= $lastMonth; $i++) {
             $month = date($format, mktime(0, 0, 0, $i, 1));
             $monthList[$i] = $month;
         }
@@ -32,7 +32,7 @@ class DateRelatedHelpers
      */
     public static function getYearsList($firstYear = 0, $lastYear = 0, $format = 'Y'): array
     {
-        if((checkdate(1, 1, $firstYear) === false ||
+        if ((checkdate(1, 1, $firstYear) === false ||
                 checkdate(1, 1, $lastYear) === false) &&
             $lastYear <= $firstYear) {
             return [date($format)];
@@ -40,4 +40,13 @@ class DateRelatedHelpers
             return range($firstYear, $lastYear);
         }
     }
+
+    public static function getDuration($startTime, $endTime): int
+    {
+        $startTime = new \DateTime($startTime);
+        $endTime = new \DateTime($endTime);
+        $duration = $endTime->diff($startTime);
+        return strtotime($duration->format("%h:%i"));
+    }
+
 }

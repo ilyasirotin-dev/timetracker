@@ -1,35 +1,44 @@
+{% set is_admin = session.get('auth')['is_admin'] %}
 {% set links = [
         'log': [
             'title': 'Log',
-            'uri': url('/log')
+            'uri': url('/log'),
+            'admin': '0'
         ],
         'password': [
             'title': 'Change password',
-            'uri': url('/password')
+            'uri': url('/password'),
+            'admin': '0'
         ],
         'users': [
             'title': 'Users List',
-            'uri': url('/list')
+            'uri': url('/list'),
+            'admin': '1'
         ],
         'create': [
             'title': 'Create user',
-            'uri': url('/create')
+            'uri': url('/create'),
+            'admin': '1'
         ],
         'holidays': [
             'title': 'Holidays',
-            'uri': url('/holidays')
+            'uri': url('/holidays'),
+            'admin': '0'
         ],
         'holidays_create': [
             'title': 'Create holiday',
-            'uri': url('/holidays/create')
+            'uri': url('/holidays/create'),
+            'admin': '1'
         ],
         'latecomers': [
             'title': 'Latecomers',
-            'uri': url('/latecomers')
+            'uri': url('/latecomers'),
+            'admin': '1'
         ],
         'logout': [
             'title': 'Log out',
-            'uri': url('/logout')
+            'uri': url('/logout'),
+            'admin': '0'
         ]
 ] %}
 
@@ -41,11 +50,19 @@
         <div class="col-8">
             <ul class="nav justify-content-end">
                 {% for link in links %}
-                    <li class="nav-item">
-                        <a class="nav-link" href={{ link['uri'] }}>
-                            {{ link['title'] }}
-                        </a>
-                    </li>
+                    {% if is_admin == '1' %}
+                        <li class="nav-item">
+                            <a class="nav-link" href={{ link['uri'] }}>
+                                {{ link['title'] }}
+                            </a>
+                        </li>
+                    {% elseif link['admin'] != '1' %}
+                        <li class="nav-item">
+                            <a class="nav-link" href={{ link['uri'] }}>
+                                {{ link['title'] }}
+                            </a>
+                        </li>
+                    {% endif %}
                 {% endfor %}
             </ul>
         </div>

@@ -3,18 +3,21 @@ declare(strict_types=1);
 
 namespace App\Helpers\Tables;
 
-class LatecomersTable extends TableBase
+class LogTable extends TableBase
 {
     public function __construct($year = 0, $month = 0)
     {
         parent::__construct($year, $month);
     }
 
-    public function setTableData()
+    /**
+     * Generates a LogTable
+     */
+    public function setTableData(): void
     {
         foreach ($this->calendar->datesList as $date) {
             foreach ($this->users as $user) {
-                $records = $user->getLatecomers([
+                $records = $user->getTimeTable([
                     'conditions' => 'created_at = :date:',
                     'bind' => [
                         'date' => strtotime($date),
@@ -22,11 +25,17 @@ class LatecomersTable extends TableBase
                 ]);
                 $dayRecords = [];
                 foreach ($records as $record) {
-                    if ($record !== null) {
-                        $dayRecords[] = 1;
-                    } else {
-                        $dayRecords[] = 0;
-                    }
+                    $start = date('H:i', (int)$record->start);
+                    ($record->end === null) ?
+                        $end = '' :
+                        $end = date('H:i', (int)$record->end);
+
+                    $dayRecords[] =
+                        [
+                            'id' => $record->id,
+                            'start' => $start,
+                            'end' => $end,
+                        ];
                 }
                 $usersDayRecords[$user->id] = $dayRecords;
             }

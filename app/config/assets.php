@@ -2,12 +2,12 @@
 
 $assets = $di->getShared('assets');
 
-$headerCollection = $assets->collection('headerCss');
-$footerCollection = $assets->collection('footerJs');
+$headerCollectionCss = $assets->collection('headerCss');
+$footerCollectionJs = $assets->collection('footerJs');
 
-$headerCollection->addCss('css/bootstrap.min.css');
-$headerCollection->addCss('css/errors.css');
+$headerCollectionCss->addCss('css/bootstrap.min.css');
+$headerCollectionCss->addCss('css/errors.css');
 
-$footerCollection->addJs('js/bootstrap.min.js');
-$footerCollection->addJs('js/jquery-3.5.1.min.js');
-$footerCollection->addJs('js/toggle_rows.js');
+$footerCollectionJs->addJs('js/jquery-3.5.1.min.js');
+$footerCollectionJs->addJs('js/bootstrap.min.js');
+$footerCollectionJs->addJs('js/script.js');

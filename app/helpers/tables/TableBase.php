@@ -25,7 +25,7 @@ abstract class TableBase extends Injectable
 
     public function __construct($year = 0, $month = 0)
     {
-        $this->calendar = new Calendar($year, $month);
+        $this->calendar = new Calendar($year, $month, 'Y-m-d');
         $this->setUsers($this->session->get('auth')['id']);
         static::setTableData();
     }
@@ -35,15 +35,13 @@ abstract class TableBase extends Injectable
     public function setUsers($firstUser = 0): void
     {
         try {
-            $this->users = Users::find(
-                [
-                    'conditions' => 'active = 1',
-                    'order' => 'field(id, :id:) DESC',
-                    'bind' => [
-                        'id' => $firstUser,
-                    ]
+            $this->users = Users::find([
+                'conditions' => 'active = 1',
+                'order' => 'field(id, :id:) DESC',
+                'bind' => [
+                    'id' => $firstUser,
                 ]
-            );
+            ]);
         } catch (Exception $e) {
             echo $e->getMessage();
         }

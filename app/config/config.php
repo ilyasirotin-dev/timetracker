@@ -26,5 +26,106 @@ return new \Phalcon\Config([
         'libraryDir'     => APP_PATH . '/library/',
         'cacheDir'       => BASE_PATH . '/cache/',
         'baseUri'        => '/',
-    ]
+    ],
+    'roles' => [
+        'Admin',
+        'User',
+        'Guest',
+    ],
+    'components' => [
+        'error' => [
+            'show404',
+            'show500',
+            'show401',
+        ],
+        'holidays' => [
+            'index',
+            'create',
+        ],
+        'index' => [
+            'index',
+        ],
+        'latecomers' => [
+            'index',
+            'setTime',
+            'delete',
+        ],
+        'log' => [
+            'index',
+            'start',
+            'stop',
+            'update',
+        ],
+        'session' => [
+            'index',
+            'logout',
+            'register',
+        ],
+        'user' => [
+            'list',
+            'create',
+            'suspend',
+            'password',
+        ],
+    ],
+    'accesslist' => [
+        'Guest' => [
+            'error' => [
+                'show404',
+                'show500',
+                'show401',
+            ],
+            'index' => [
+                'index',
+            ],
+            'session' => [
+                'index',
+            ]
+        ],
+        'Admin' => [
+            'holidays' => [
+                'index',
+                'create',
+            ],
+            'latecomers' => [
+                'index',
+                'setTime',
+                'delete',
+            ],
+            'log' => [
+                'index',
+                'start',
+                'stop',
+                'update',
+            ],
+            'session' => [
+                'logout',
+                'register',
+            ],
+            'user' => [
+                'list',
+                'create',
+                'suspend',
+                'password',
+            ],
+        ],
+        'User' => [
+            'holidays' => [
+                'index',
+            ],
+            'log' => [
+                'index',
+                'start',
+                'stop',
+            ],
+            'session' => [
+                'index',
+                'logout',
+                'register',
+            ],
+            'user' => [
+                'password',
+            ],
+        ],
+    ],
 ]);

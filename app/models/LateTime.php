@@ -10,9 +10,9 @@ class LateTime extends Model
     /**
      * @var int
      */
-    public $hours;
+    public $id;
     /**
      * @var int
      */
-    public $minutes;
+    public $time;
 }

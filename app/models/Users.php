@@ -51,20 +51,16 @@ class Users extends Model
         $this->hasMany(
             'id',
             TimeTable::class,
-            'user_id',
-            [
-                'alias' => 'timetable',
-            ]
-        );
+            'user_id', [
+            'alias' => 'timetable',
+        ]);
 
         $this->hasMany(
             'id',
             Latecomers::class,
-            'user_id',
-            [
-                'alias' => 'latecomers',
-            ]
-        );
+            'user_id', [
+            'alias' => 'latecomers',
+        ]);
     }
 
     public function validation(): bool
@@ -73,20 +69,16 @@ class Users extends Model
 
         $validator->add(
             'email',
-            new UniquenessValidator(
-                [
-                    'message' => 'The email was registered by another user',
-                ]
-            )
+            new UniquenessValidator([
+                'message' => 'The email was registered by another user',
+            ])
         );
 
         $validator->add(
             'username',
-            new UniquenessValidator(
-                [
-                    'message' => 'That username is already taken',
-                ]
-            )
+            new UniquenessValidator([
+                'message' => 'That username is already taken',
+            ])
         );
 
         return $this->validate($validator);

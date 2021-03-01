@@ -16,7 +16,7 @@
             <td>{{ user.fname }} {{ user.lname }}</td>
             <td>{{ user.username }}</td>
             <td>{{ user.email }}</td>
-            {% if user.is_admin === 1 %}
+            {% if user.is_admin === '1' %}
                 <td>Admin</td>
             {% else %}
                 <td>User</td>

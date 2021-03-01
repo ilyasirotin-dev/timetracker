@@ -10,6 +10,10 @@ class TimeTable extends Model
     /**
      * @var int
      */
+    public $id;
+    /**
+     * @var int
+     */
     public $user_id;
     /**
      * @var int
@@ -23,16 +27,18 @@ class TimeTable extends Model
      * @var int
      */
     public $created_at;
+    /**
+     * @var int
+     */
+    public $total;
 
     public function initialize()
     {
         $this->belongsTo(
             'user_id',
             Users::class,
-            'id',
-            [
-                'alias' => 'users',
-            ]
-        );
+            'id', [
+            'alias' => 'users',
+        ]);
     }
 }

@@ -16,14 +16,14 @@ $loader->registerFiles(
  */
 $loader->registerNamespaces(
     [
-        'App' => APP_PATH,
-        'App\Controllers' => APP_PATH . '/controllers',
-        'App\Models' => APP_PATH . '/models',
-        'App\Providers' => APP_PATH . '/providers',
-        'App\Plugins' => APP_PATH . '/plugins',
-        'App\Forms' => APP_PATH . '/forms',
-        'App\Helpers' => APP_PATH . '/helpers',
-        'App\Helpers\Tables' => APP_PATH . '/helpers/tables',
+        'App'                   => APP_PATH,
+        'App\Controllers'       => APP_PATH . '/controllers',
+        'App\Models'            => APP_PATH . '/models',
+        'App\Providers'         => APP_PATH . '/providers',
+        'App\Plugins'           => APP_PATH . '/plugins',
+        'App\Forms'             => APP_PATH . '/forms',
+        'App\Helpers'           => APP_PATH . '/helpers',
+        'App\Helpers\Tables'    => APP_PATH . '/helpers/tables',
     ]
 );
 

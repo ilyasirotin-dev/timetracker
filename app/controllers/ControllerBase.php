@@ -12,4 +12,13 @@ class ControllerBase extends Controller
         $this->tag->prependTitle('Hours Log | ');
         $this->view->setTemplateAfter('main');
     }
+
+    public function indexAction()
+    {
+        $auth = $this->session->get('auth');
+
+        if ($auth !== null) {
+            $this->response->redirect('/log');
+        }
+    }
 }

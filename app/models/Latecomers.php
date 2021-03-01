@@ -10,6 +10,10 @@ class Latecomers extends Model
     /**
      * @var int
      */
+    public $id;
+    /**
+     * @var int
+     */
     public $user_id;
     /**
      * @var int
@@ -21,10 +25,8 @@ class Latecomers extends Model
         $this->belongsTo(
             'user_id',
             Users::class,
-            'id',
-            [
-                'alias' => 'users',
-            ]
-        );
+            'id', [
+            'alias' => 'users',
+        ]);
     }
 }

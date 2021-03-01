@@ -23,11 +23,11 @@ class Calendar
      * @param int $year
      * @param int $month
      */
-    public function __construct(int $year = 0, int $month = 0)
+    public function __construct(int $year = 0, int $month = 0, $format = 'Y-m-d')
     {
         $this->setYear($year);
         $this->setMonth($month);
-        $this->setDatesList();
+        $this->setDatesList($format);
     }
 
     /**
@@ -36,13 +36,13 @@ class Calendar
      * @return array
      * @throws \Exception
      */
-    public function setDatesList($format = 'Y-m-d'): void
+    public function setDatesList($format): void
     {
         $datesList = [];
-        $dateString = $this->year.'-'.$this->month;
+        $dateString = $this->year . '-' . $this->month;
         $lastDayOfMonth = date('t', strtotime($dateString));
 
-        $firstDateOfMonth = new \DateTime($dateString.'-1');
+        $firstDateOfMonth = new \DateTime($dateString . '-1');
         $step = new \DateInterval('P1D');
         $period = new \DatePeriod($firstDateOfMonth, $step, $lastDayOfMonth - 1);
 

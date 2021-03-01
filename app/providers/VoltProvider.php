@@ -13,12 +13,10 @@ class VoltProvider implements ServiceProviderInterface
         $view = $di->getShared('view');
         $di->setShared('volt', function () use ($view, $di) {
             $volt = new Volt($view, $di);
-            $volt->setOptions(
-                [
-                    'path' => $di->getShared('config')->application->cacheDir,
-                    'separator' => '_',
-                ]
-            );
+            $volt->setOptions([
+                'path' => $di->getShared('config')->application->cacheDir,
+                'separator' => '_',
+            ]);
 
             return $volt;
         });

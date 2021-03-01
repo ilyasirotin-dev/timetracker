@@ -13,11 +13,9 @@ class SessionProvider implements ServiceProviderInterface
     {
         $di->setShared('session', function () {
             $session = new SessionManager();
-            $sessionSave = new SessionAdapter(
-                [
-                    'savePath' => sys_get_temp_dir(),
-                ]
-            );
+            $sessionSave = new SessionAdapter([
+                'savePath' => sys_get_temp_dir(),
+            ]);
             $session->setAdapter($sessionSave);
             $session->start();
 

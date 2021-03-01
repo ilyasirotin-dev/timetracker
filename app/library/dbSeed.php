@@ -8,16 +8,14 @@ function seedUsers()
 {
     for ($i = 0; $i < USERS_COUNT; $i++) {
         $users = new \App\Models\Users();
-        $users->assign(
-            [
-                'fname' => 'FirstName_' . $i,
-                'lname' => 'LastName_' . $i,
-                'username' => 'Username_' . $i,
-                'email' => "test_{$i}" . "@localhost.com",
-                'is_admin' => false,
-                'password' => 'password_' . $i,
-            ]
-        );
+        $users->assign([
+            'fname' => 'FirstName_' . $i,
+            'lname' => 'LastName_' . $i,
+            'username' => 'Username_' . $i,
+            'email' => "test_{$i}" . "@localhost.com",
+            'is_admin' => false,
+            'password' => 'password_' . $i,
+        ]);
 
         try {
             $users->save();
@@ -29,7 +27,7 @@ function seedUsers()
 
 function seedTimeTable()
 {
-    for($i = 0; $i < TIMESTAMPS_COUNT; $i++) {
+    for ($i = 0; $i < TIMESTAMPS_COUNT; $i++) {
         $timeTable = new \App\Models\TimeTable();
         $start_time = [
             random_int(7, 9),
@@ -49,18 +47,16 @@ function seedTimeTable()
             $start_time[5],
         ];
 
-        $timeTable->assign(
-            [
-                'user_id' => random_int(1, USERS_COUNT),
-                'start' => mktime(...$start_time),
-                'end' => mktime(...$end_time),
-                'created_at' => mktime(0, 0, 0, $start_time[3], $start_time[4], $start_time[5]),
-            ]
-        );
+        $timeTable->assign([
+            'user_id' => random_int(1, USERS_COUNT),
+            'start' => mktime(...$start_time),
+            'end' => mktime(...$end_time),
+            'created_at' => mktime(0, 0, 0, $start_time[3], $start_time[4], $start_time[5]),
+        ]);
 
         try {
             $timeTable->save();
-        } catch(\Phalcon\Exception $e) {
+        } catch (\Phalcon\Exception $e) {
             print_die($e->getMessage());
         }
     }

@@ -19,4 +19,4 @@
     </div>
 </form>
 {{ partial('date_selector', ['action' : url('/latecomers')])}}
-{{ partial('table') }}
+{{ partial('latecomers_table') }}

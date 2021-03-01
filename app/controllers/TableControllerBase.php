@@ -12,6 +12,7 @@ class TableControllerBase extends ControllerBase
     public $selectedYear;
     public $selectedMonth;
     public $table;
+    public $statistic;
 
     protected function initialize()
     {

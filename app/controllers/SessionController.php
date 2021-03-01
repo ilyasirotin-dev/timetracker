@@ -17,34 +17,34 @@ class SessionController extends ControllerBase
 
     public function indexAction(): void
     {
-            $form = new LoginForm();
+        parent::indexAction();
 
-        if($this->request->isPost()) {
+        $form = new LoginForm();
+
+        if ($this->request->isPost()) {
             if ($this->security->checkToken()) {
 
                 $email = $this->request->getPost('email');
                 $password = $this->request->getPost('password');
 
-                 $user = Users::findFirst(
-                     [
-                         'columns' => 'id, username, is_admin, password',
-                         "email = :email: AND active = 1",
-                         'bind' => [
-                             'email' => $email,
-                         ],
-                     ]
-                 );
+                $user = Users::findFirst([
+                    'columns' => 'id, username, is_admin, password',
+                    "email = :email: AND active = 1",
+                    'bind' => [
+                        'email' => $email,
+                    ],
+                ]);
 
-                if($user !== null) {
+                if ($user !== null) {
                     $checkPassword = $this->security->checkHash($password, $user->password);
-                    if($checkPassword === true) {
+                    if ($checkPassword === true) {
                         $this->registerSession($user);
                         $this->response->redirect('/log');
                     } else {
                         $this->flash->error('Wrong password');
                     }
                 } else {
-                    $this->flash->error('Wrong email');
+                    $this->flash->error('Can\'t find user with this email');
                 }
             }
         }
@@ -54,18 +54,16 @@ class SessionController extends ControllerBase
 
     public function logoutAction(): void
     {
-        $this->session->remove('auth');
+        $this->session->destroy();
         $this->response->redirect('/');
     }
 
     private function registerSession($user): void
     {
-        $this->session->set('auth',
-            [
-                'id' => $user->id,
-                'username' => $user->username,
-                'is_admin' => $user->is_admin,
-            ]
-        );
+        $this->session->set('auth', [
+            'id' => $user->id,
+            'username' => $user->username,
+            'is_admin' => $user->is_admin,
+        ]);
     }
 }

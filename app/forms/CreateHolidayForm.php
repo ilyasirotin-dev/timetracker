@@ -23,12 +23,10 @@ class CreateHolidayForm extends Form
          */
         $name = new Text('name', ['class' => 'form-control']);
         $name->setLabel('Name');
-        $name->setFilters(
-            [
-                'alpha',
-                'trim',
-            ]
-        );
+        $name->setFilters([
+            'alpha',
+            'trim',
+        ]);
         $name->addValidator(
             new PresenceOf(['message' => 'Holiday name is required'])
         );
@@ -51,19 +49,17 @@ class CreateHolidayForm extends Form
          */
         $description = new TextArea('description', ['class' => 'form-control']);
         $description->setLabel('Description');
-        $description->setFilters(
-            [
-                'striptags',
-                'trim',
-            ]
-        );
+        $description->setFilters([
+            'striptags',
+            'trim',
+        ]);
 
         $this->add($description);
 
         /**
          * Repeat every year
          */
-        $repeat = new Select('repeat',
+        $repeat = new Select('repeatable',
             [
                 0 => 'No',
                 1 => 'Yes',

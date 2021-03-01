@@ -3,6 +3,6 @@ CREATE TABLE holidays (
     name VARCHAR(160) NOT NULL,
     date BIGINT NOT NULL,
     description LONGTEXT,
-    created_at BIGINT NOT NULL,
+    created_at BIGINT,
     repeatable TINYINT(1)
 );

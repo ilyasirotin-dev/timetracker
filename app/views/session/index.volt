@@ -1,7 +1,7 @@
 <div class="container my-5 col-4 justify-content-center">
     {{ flash.output() }}
     <h1>Login</h1>
-    <form method="post" action="{{ url('/login') }}">
+    <form method="post" action="{{ url('/') }}">
         <div class="mb-3">
             {{ form.label('email') }}
             {{ form.render('email', ['class' : 'form-control']) }}

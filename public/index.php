@@ -5,6 +5,7 @@ use Phalcon\Di\FactoryDefault;
 use \Phalcon\Mvc\Application;
 
 error_reporting(E_ALL);
+date_default_timezone_set('Asia/Bishkek');
 
 define('BASE_PATH', dirname(__DIR__));
 define('APP_PATH', BASE_PATH . '/app');
@@ -47,10 +48,6 @@ try {
      * Add assets
      */
     include APP_PATH . '/config/assets.php';
-
-//    include APP_PATH . '/library/dbSeed.php';
-//    seedUsers();
-//    seedTimeTable();
 
     /**
      * Handle the request

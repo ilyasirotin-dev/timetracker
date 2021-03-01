@@ -22,11 +22,9 @@ class ChangePasswordForm extends Form
          */
         $newPassword = new Password('newPassword', ['class' => 'form-control']);
         $newPassword->setLabel('New password');
-        $newPassword->addValidators(
-            [
-                new PresenceOf(['message' => 'New password is required']),
-            ]
-        );
+        $newPassword->addValidators([
+            new PresenceOf(['message' => 'New password is required']),
+        ]);
 
         $this->add($newPassword);
 
@@ -35,16 +33,12 @@ class ChangePasswordForm extends Form
          */
         $repeatPassword = new Password('repeatPassword', ['class' => 'form-control']);
         $repeatPassword->setLabel('Repeat new password');
-        $repeatPassword->addValidators(
-            [
-                new Confirmation(
-                    [
-                        'message' => 'Passwords doesn\'t match',
-                        'with' => 'newPassword'
-                    ]
-                ),
-            ]
-        );
+        $repeatPassword->addValidators([
+            new Confirmation([
+                'message' => 'Passwords doesn\'t match',
+                'with' => 'newPassword'
+            ]),
+        ]);
 
         $this->add($repeatPassword);
     }
